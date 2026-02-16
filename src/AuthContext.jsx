@@ -8,24 +8,31 @@ export function AuthProvider({ children }) {
   const [token, setToken] = useState();
   const [location, setLocation] = useState("GATE");
 
-  fetch('https://fsa-jwt-practice.herokuapp.com/signup', {
+  async function register(username) {
+    const response = await fetch('https://fsa-jwt-practice.herokuapp.com/signup', {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
       username: "angela222",
-      password: "secretsecret",
     }),
   });
+  }
 
-  fetch("https://fsa-jwt-practice.herokuapp.com/authenticate", {
+  async function authenticate() {
+   const response = await fetch("https://fsa-jwt-practice.herokuapp.com/authenticate", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
   });
+  }
+
+  
+
+  
 
   const value = { location };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
