@@ -1,4 +1,5 @@
-/** Button that attempts to use the token in context when clicked */
+import { useAuth } from "./AuthContext";
+
 export default function Tablet() {
   const { authenticate } = useAuth();
 
