@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from "react";
 
-const API = "https://fsa-jwt-practice.herokuapp.com";
+const API = "https://fsa-jwt-practice.herokuapp.signup";
 
 const AuthContext = createContext();
 
@@ -8,9 +8,24 @@ export function AuthProvider({ children }) {
   const [token, setToken] = useState();
   const [location, setLocation] = useState("GATE");
 
-  // TODO: signup
+  fetch('API', {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      username: "angela222",
+      password: "secretsecret",
+    }),
+  });
 
-  // TODO: authenticate
+  fetch("https://fsa-jwt-practice.herokuapp.com/authenticate", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
 
   const value = { location };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
